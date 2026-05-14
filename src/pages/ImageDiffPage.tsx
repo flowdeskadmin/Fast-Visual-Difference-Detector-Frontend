@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import PageMeta from "../components/common/PageMeta";
 import { DiffViewer } from "../components/DiffViewer";
 import { EngineToggle } from "../components/EngineToggle";
+import { ErrorBanner } from "../components/ErrorBanner";
 import { ImageDropzone } from "../components/ImageDropzone";
 import { SampleGallery } from "../components/SampleGallery";
 import { SensitivityControl } from "../components/SensitivityControl";
@@ -149,9 +150,17 @@ export function ImageDiffPage() {
           </label>
         </section>
 
+        {error && (
+          <ErrorBanner
+            error={error}
+            engine={engine}
+            onSwitchToBrowser={() => setEngine("client")}
+          />
+        )}
+
         <section className="grid gap-4 lg:grid-cols-[1fr_2fr]">
           <SensitivityControl value={sensitivity} onChange={setSensitivity} />
-          <StatsBar result={result} loading={loading} error={error} />
+          <StatsBar result={result} loading={loading} />
         </section>
 
         <section>

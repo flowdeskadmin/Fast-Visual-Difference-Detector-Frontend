@@ -3,15 +3,18 @@ import type { DiffResult } from "../lib/diff/types";
 type Props = {
   result: DiffResult | null;
   loading: boolean;
-  error: string | null;
 };
 
 /**
  * Read-out for the algorithm's performance. The duration is the headline
  * because the assignment specifically asks for processing time in
  * milliseconds.
+ *
+ * Errors are rendered separately by `ErrorBanner` so they're impossible
+ * to miss; this component only shows informational banners (dimension
+ * mismatch, internal downsampling).
  */
-export function StatsBar({ result, loading, error }: Props) {
+export function StatsBar({ result, loading }: Props) {
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
       <Stat
@@ -49,11 +52,6 @@ export function StatsBar({ result, loading, error }: Props) {
             : "—"
         }
       />
-      {error && (
-        <div className="col-span-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-300 sm:col-span-4">
-          {error}
-        </div>
-      )}
       {result?.dimensionMismatch && (
         <div className="col-span-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-900/30 dark:text-amber-200 sm:col-span-4">
           Heads up: the two images have different dimensions. The smaller one was
