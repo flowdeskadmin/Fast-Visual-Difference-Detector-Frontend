@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap")
+layer(base);
+
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-*: initial;
+  --font-sans: Inter, system-ui, sans-serif;
+
+  --color-current: currentColor;
+  --color-transparent: transparent;
+
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+
+  --color-accent-500: #ef4444;
+  --color-accent-600: #dc2626;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply font-sans antialiased bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+/* Custom range slider styling so it looks consistent across browsers */
+input[type="range"].slider-track {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"].slider-track::-webkit-slider-runnable-track {
+  height: 6px;
+  background: linear-gradient(
+    to right,
+    var(--color-brand-500) 0%,
+    var(--color-brand-500) var(--slider-progress, 50%),
+    rgb(229 231 235) var(--slider-progress, 50%),
+    rgb(229 231 235) 100%
+  );
+  border-radius: 999px;
+}
+
+.dark input[type="range"].slider-track::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    var(--color-brand-500) 0%,
+    var(--color-brand-500) var(--slider-progress, 50%),
+    rgb(55 65 81) var(--slider-progress, 50%),
+    rgb(55 65 81) 100%
+  );
+}
+
+input[type="range"].slider-track::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 18px;
+  width: 18px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--color-brand-500);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+
+input[type="range"].slider-track::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+input[type="range"].slider-track::-moz-range-track {
+  height: 6px;
+  background: rgb(229 231 235);
+  border-radius: 999px;
+}
+
+.dark input[type="range"].slider-track::-moz-range-track {
+  background: rgb(55 65 81);
+}
+
+input[type="range"].slider-track::-moz-range-progress {
+  height: 6px;
+  background: var(--color-brand-500);
+  border-radius: 999px;
+}
+
+input[type="range"].slider-track::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--color-brand-500);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
